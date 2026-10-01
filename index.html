@@ -1,511 +1,1188 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2563eb">
 
-  <title>Conversor Fácil</title>
+<title>Conversor Fácil</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      min-height: 100vh;
-      padding: 30px 15px;
-      color: #ffffff;
+html{
+  scroll-behavior:smooth;
+}
 
-      background:
-        radial-gradient(circle at top left, #3b82f6 0%, transparent 35%),
-        radial-gradient(circle at bottom right, #8b5cf6 0%, transparent 35%),
-        linear-gradient(135deg, #020617, #0f172a);
-    }
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+  color:#f8fafc;
+  background:
+    radial-gradient(circle at 10% 10%,#2563eb55,transparent 30%),
+    radial-gradient(circle at 90% 90%,#7c3aed55,transparent 30%),
+    linear-gradient(135deg,#020617,#0f172a 55%,#111827);
+  transition:.3s;
+}
 
-    .caixa {
-      width: 100%;
-      max-width: 650px;
-      margin: auto;
-      padding: 30px 20px;
+body.light{
+  color:#0f172a;
+  background:
+    radial-gradient(circle at 10% 10%,#60a5fa55,transparent 30%),
+    radial-gradient(circle at 90% 90%,#c084fc55,transparent 30%),
+    linear-gradient(135deg,#eff6ff,#f8fafc,#f5f3ff);
+}
 
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 28px;
+button,
+input,
+select{
+  font:inherit;
+}
 
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+button{
+  cursor:pointer;
+}
 
-      box-shadow:
-        0 25px 60px rgba(0, 0, 0, 0.45);
-    }
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  padding:14px;
+  background:#020617dd;
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid #ffffff18;
+}
 
-    .topo {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+body.light header{
+  background:#ffffffdd;
+  border-color:#00000012;
+}
 
-    .logo {
-      width: 75px;
-      height: 75px;
-      margin: auto;
+.nav{
+  max-width:1050px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:bold;
+  font-size:19px;
+}
 
-      border-radius: 22px;
+.logo-icon{
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:13px;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  box-shadow:0 8px 25px #2563eb55;
+}
 
-      font-size: 38px;
+.top-buttons{
+  display:flex;
+  gap:8px;
+}
 
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+.icon-btn{
+  width:42px;
+  height:42px;
+  border:1px solid #ffffff20;
+  border-radius:12px;
+  background:#ffffff0d;
+  color:white;
+}
 
-      box-shadow:
-        0 10px 30px rgba(59, 130, 246, 0.45);
-    }
+body.light .icon-btn{
+  color:#0f172a;
+  background:#ffffffaa;
+  border-color:#00000015;
+}
 
-    h1 {
-      margin: 18px 0 8px;
-      font-size: 34px;
+.hero{
+  max-width:1050px;
+  margin:50px auto 30px;
+  padding:20px;
+  text-align:center;
+}
 
-      background: linear-gradient(90deg, #60a5fa, #c084fc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.badge{
+  display:inline-block;
+  padding:8px 15px;
+  border-radius:30px;
+  background:#2563eb22;
+  border:1px solid #60a5fa55;
+  color:#93c5fd;
+  font-size:13px;
+  margin-bottom:18px;
+}
 
-    .descricao {
-      margin: 0;
-      color: #cbd5e1;
-      font-size: 15px;
-    }
+body.light .badge{
+  color:#1d4ed8;
+}
 
-    .conversor {
-      margin-top: 20px;
-      padding: 22px;
+.hero h1{
+  font-size:clamp(38px,8vw,68px);
+  line-height:1;
+  margin-bottom:18px;
+  background:linear-gradient(90deg,#60a5fa,#a78bfa,#c084fc);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
-      border-radius: 20px;
+.hero p{
+  max-width:650px;
+  margin:auto;
+  color:#cbd5e1;
+  font-size:17px;
+  line-height:1.6;
+}
 
-      background: rgba(255, 255, 255, 0.09);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+body.light .hero p{
+  color:#475569;
+}
 
-      transition: 0.25s;
-    }
+.container{
+  max-width:1050px;
+  margin:auto;
+  padding:0 15px 70px;
+}
 
-    .conversor:hover {
-      transform: translateY(-3px);
+.search-box{
+  max-width:650px;
+  margin:20px auto 35px;
+  position:relative;
+}
 
-      background: rgba(255, 255, 255, 0.13);
+.search-box input{
+  width:100%;
+  padding:17px 20px 17px 50px;
+  border-radius:16px;
+  border:1px solid #ffffff20;
+  background:#ffffff0d;
+  color:white;
+  outline:none;
+  backdrop-filter:blur(10px);
+}
 
-      box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.25);
-    }
+body.light .search-box input{
+  color:#0f172a;
+  background:#ffffffcc;
+  border-color:#00000015;
+}
 
-    .conversor h2 {
-      margin: 0 0 15px;
-      color: #ffffff;
-      font-size: 21px;
-    }
+.search-box input::placeholder{
+  color:#94a3b8;
+}
 
-    input,
-    select,
-    button {
-      width: 100%;
-      padding: 14px;
-      margin: 6px 0;
+.search-icon{
+  position:absolute;
+  left:18px;
+  top:50%;
+  transform:translateY(-50%);
+}
 
-      border-radius: 12px;
+.section-title{
+  margin-bottom:18px;
+  font-size:22px;
+}
 
-      font-size: 16px;
-      font-family: Arial, sans-serif;
+.categories{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
 
-      box-sizing: border-box;
-    }
+.category{
+  border:1px solid #ffffff18;
+  border-radius:20px;
+  padding:20px;
+  min-height:140px;
+  color:white;
+  text-align:left;
+  background:#ffffff0b;
+  transition:.25s;
+}
 
-    input,
-    select {
-      color: #0f172a;
-      background: #ffffff;
-      border: 2px solid transparent;
+body.light .category{
+  color:#0f172a;
+  background:#ffffffaa;
+  border-color:#00000010;
+}
 
-      outline: none;
+.category:hover{
+  transform:translateY(-5px);
+  border-color:#60a5fa66;
+  background:#ffffff15;
+  box-shadow:0 15px 35px #0005;
+}
 
-      transition: 0.2s;
-    }
+.category-icon{
+  font-size:32px;
+  margin-bottom:13px;
+}
 
-    input:focus,
-    select:focus {
-      border-color: #60a5fa;
-      box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
-    }
+.category h3{
+  margin-bottom:6px;
+}
 
-    button {
-      margin-top: 10px;
+.category p{
+  color:#94a3b8;
+  font-size:13px;
+  line-height:1.4;
+}
 
-      color: #ffffff;
-      font-weight: bold;
+.converter-area{
+  margin-top:45px;
+}
 
-      border: none;
+.converter{
+  display:none;
+  padding:25px;
+  border-radius:25px;
+  background:#ffffff0d;
+  border:1px solid #ffffff18;
+  backdrop-filter:blur(15px);
+  box-shadow:0 20px 50px #0005;
+}
 
-      cursor: pointer;
+body.light .converter{
+  background:#ffffffaa;
+  border-color:#00000010;
+}
 
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
+.converter.active{
+  display:block;
+  animation:entrada .35s ease;
+}
 
-      box-shadow:
-        0 8px 20px rgba(37, 99, 235, 0.35);
+@keyframes entrada{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
 
-      transition: 0.2s;
-    }
+.converter-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:22px;
+  gap:10px;
+}
 
-    button:hover {
-      transform: translateY(-2px);
+.converter-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 
-      box-shadow:
-        0 12px 25px rgba(124, 58, 237, 0.45);
-    }
+.converter-icon{
+  width:52px;
+  height:52px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+}
 
-    button:active {
-      transform: scale(0.98);
-    }
+.converter-title h2{
+  font-size:23px;
+}
 
-    p[id^="resultado"] {
-      min-height: 20px;
+.converter-title p{
+  color:#94a3b8;
+  font-size:13px;
+  margin-top:4px;
+}
 
-      margin: 15px 0 0;
+.back-btn{
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #ffffff20;
+  background:#ffffff0d;
+  color:white;
+}
 
-      color: #93c5fd;
+body.light .back-btn{
+  color:#0f172a;
+  background:#ffffffaa;
+  border-color:#00000015;
+}
 
-      font-size: 17px;
-      font-weight: bold;
+.fields{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
 
-      text-shadow:
-        0 0 10px rgba(147, 197, 253, 0.25);
-    }
+.field label{
+  display:block;
+  margin-bottom:7px;
+  color:#cbd5e1;
+  font-size:13px;
+}
 
-    .rodape {
-      text-align: center;
-      margin-top: 25px;
+body.light .field label{
+  color:#475569;
+}
 
-      color: #94a3b8;
-      font-size: 13px;
-    }
+.field input,
+.field select{
+  width:100%;
+  padding:15px;
+  border-radius:12px;
+  border:1px solid #cbd5e133;
+  background:white;
+  color:#0f172a;
+  outline:none;
+}
 
-    @media (max-width: 480px) {
+.field input:focus,
+.field select:focus{
+  border-color:#60a5fa;
+  box-shadow:0 0 0 3px #3b82f633;
+}
 
-      body {
-        padding: 15px 10px;
-      }
+.action-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:15px;
+}
 
-      .caixa {
-        padding: 25px 15px;
-        border-radius: 22px;
-      }
+.convert-btn{
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  color:white;
+  font-weight:bold;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  box-shadow:0 8px 20px #2563eb44;
+  transition:.2s;
+}
 
-      h1 {
-        font-size: 28px;
-      }
+.convert-btn:hover{
+  transform:translateY(-2px);
+}
 
-      .logo {
-        width: 65px;
-        height: 65px;
-        font-size: 32px;
-      }
+.clear-btn{
+  padding:15px;
+  border:1px solid #ffffff20;
+  border-radius:12px;
+  color:white;
+  background:#ffffff0d;
+}
 
-      .conversor {
-        padding: 18px;
-      }
-    }
-  </style>
+body.light .clear-btn{
+  color:#0f172a;
+  background:#ffffffaa;
+  border-color:#00000015;
+}
+
+.result{
+  margin-top:18px;
+  padding:20px;
+  border-radius:16px;
+  text-align:center;
+  background:#2563eb12;
+  border:1px solid #3b82f633;
+  min-height:85px;
+}
+
+.result-label{
+  color:#94a3b8;
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.result-value{
+  color:#93c5fd;
+  font-size:24px;
+  font-weight:bold;
+  word-break:break-word;
+}
+
+.copy-btn{
+  margin-top:10px;
+  padding:8px 14px;
+  border:1px solid #ffffff20;
+  border-radius:10px;
+  background:#ffffff0d;
+  color:white;
+  font-size:13px;
+}
+
+body.light .copy-btn{
+  color:#0f172a;
+}
+
+.extra{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:12px;
+  gap:10px;
+}
+
+.favorite{
+  border:none;
+  background:transparent;
+  color:#94a3b8;
+  font-size:22px;
+}
+
+.favorite.active{
+  color:#facc15;
+}
+
+.history{
+  margin-top:50px;
+  padding:25px;
+  border-radius:22px;
+  background:#ffffff0b;
+  border:1px solid #ffffff18;
+}
+
+body.light .history{
+  background:#ffffffaa;
+  border-color:#00000010;
+}
+
+.history-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:15px;
+}
+
+.history-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.history-item{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px;
+  border-radius:12px;
+  background:#ffffff08;
+  color:#cbd5e1;
+  font-size:13px;
+}
+
+body.light .history-item{
+  color:#475569;
+  background:#00000005;
+}
+
+.empty{
+  color:#94a3b8;
+  text-align:center;
+  padding:15px;
+}
+
+.clear-history{
+  border:none;
+  background:none;
+  color:#f87171;
+  font-size:13px;
+}
+
+.toast{
+  position:fixed;
+  bottom:25px;
+  left:50%;
+  transform:translate(-50%,120px);
+  z-index:200;
+  padding:13px 18px;
+  border-radius:13px;
+  background:#0f172a;
+  color:white;
+  box-shadow:0 10px 30px #0006;
+  transition:.3s;
+  opacity:0;
+}
+
+.toast.show{
+  transform:translate(-50%,0);
+  opacity:1;
+}
+
+footer{
+  text-align:center;
+  padding:30px 15px 50px;
+  color:#64748b;
+  font-size:13px;
+}
+
+.top{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  border:none;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:white;
+  box-shadow:0 8px 25px #0005;
+  display:none;
+  z-index:90;
+}
+
+.top.show{
+  display:block;
+}
+
+.hidden{
+  display:none!important;
+}
+
+@media(max-width:800px){
+  .categories{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:500px){
+  body{
+    padding-bottom:20px;
+  }
+
+  header{
+    padding:10px;
+  }
+
+  .logo span:last-child{
+    display:none;
+  }
+
+  .hero{
+    margin-top:30px;
+  }
+
+  .hero h1{
+    font-size:43px;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  .categories{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+
+  .category{
+    min-height:125px;
+    padding:15px;
+  }
+
+  .category-icon{
+    font-size:27px;
+  }
+
+  .converter{
+    padding:18px;
+  }
+
+  .converter-head{
+    align-items:flex-start;
+  }
+
+  .fields{
+    grid-template-columns:1fr;
+  }
+
+  .action-buttons{
+    grid-template-columns:1fr;
+  }
+
+  .back-btn{
+    font-size:12px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="caixa">
+<header>
+  <div class="nav">
 
-    <div class="topo">
-
-      <div class="logo">
-        🔄
-      </div>
-
-      <h1>Conversor Fácil</h1>
-
-      <p class="descricao">
-        Converta unidades de forma rápida, simples e gratuita.
-      </p>
-
+    <div class="logo">
+      <div class="logo-icon">🔄</div>
+      <span>Conversor Fácil</span>
     </div>
 
-
-    <!-- DISTÂNCIA -->
-
-    <div class="conversor">
-
-      <h2>📏 Distância</h2>
-
-      <input
-        type="number"
-        id="valor"
-        placeholder="Digite um valor"
-      >
-
-      <select id="unidade">
-
-        <option value="km">
-          Quilômetros → Metros
-        </option>
-
-        <option value="m">
-          Metros → Quilômetros
-        </option>
-
-        <option value="cm">
-          Centímetros → Metros
-        </option>
-
-      </select>
-
-      <button onclick="converter()">
-        Converter
+    <div class="top-buttons">
+      <button class="icon-btn" onclick="toggleTheme()" title="Tema">
+        🌙
       </button>
-
-      <p id="resultado"></p>
-
     </div>
 
-
-    <!-- PESO -->
-
-    <div class="conversor">
-
-      <h2>⚖️ Peso</h2>
-
-      <input
-        type="number"
-        id="peso"
-        placeholder="Digite um valor"
-      >
-
-      <select id="unidadePeso">
-
-        <option value="kg">
-          Quilogramas → Gramas
-        </option>
-
-        <option value="g">
-          Gramas → Quilogramas
-        </option>
-
-        <option value="mg">
-          Miligramas → Gramas
-        </option>
-
-      </select>
-
-      <button onclick="converterPeso()">
-        Converter
-      </button>
-
-      <p id="resultadoPeso"></p>
-
-    </div>
+  </div>
+</header>
 
 
-    <!-- VOLUME -->
+<section class="hero">
 
-    <div class="conversor">
+  <div class="badge">
+    ⚡ Rápido • Gratuito • Fácil
+  </div>
 
-      <h2>🧪 Volume</h2>
+  <h1>Conversor Fácil</h1>
 
-      <input
-        type="number"
-        id="volume"
-        placeholder="Digite um valor"
-      >
+  <p>
+    Converta unidades de forma rápida, simples e gratuita.
+    Escolha uma categoria e faça sua conversão.
+  </p>
 
-      <select id="unidadeVolume">
-
-        <option value="l">
-          Litros → Mililitros
-        </option>
-
-        <option value="ml">
-          Mililitros → Litros
-        </option>
-
-      </select>
-
-      <button onclick="converterVolume()">
-        Converter
-      </button>
-
-      <p id="resultadoVolume"></p>
-
-    </div>
+</section>
 
 
-    <!-- TEMPERATURA -->
+<main class="container">
 
-    <div class="conversor">
+  <div class="search-box">
 
-      <h2>🌡️ Temperatura</h2>
+    <span class="search-icon">🔎</span>
 
-      <input
-        type="number"
-        id="temperatura"
-        placeholder="Digite um valor"
-      >
-
-      <select id="unidadeTemperatura">
-
-        <option value="c-f">
-          Celsius → Fahrenheit
-        </option>
-
-        <option value="f-c">
-          Fahrenheit → Celsius
-        </option>
-
-        <option value="c-k">
-          Celsius → Kelvin
-        </option>
-
-        <option value="k-c">
-          Kelvin → Celsius
-        </option>
-
-      </select>
-
-      <button onclick="converterTemperatura()">
-        Converter
-      </button>
-
-      <p id="resultadoTemperatura"></p>
-
-    </div>
-
-
-    <div class="rodape">
-      Conversor Fácil • Gratuito e simples
-    </div>
+    <input
+      id="search"
+      type="text"
+      placeholder="Pesquisar conversor..."
+      oninput="searchConverters()"
+    >
 
   </div>
 
 
-  <script>
-
-    function converter() {
-
-      let valor =
-        Number(document.getElementById("valor").value);
-
-      let unidade =
-        document.getElementById("unidade").value;
-
-      let resultado = "";
-
-      if (unidade === "km") {
-        resultado = valor * 1000 + " metros";
-      }
-
-      if (unidade === "m") {
-        resultado = valor / 1000 + " quilômetros";
-      }
-
-      if (unidade === "cm") {
-        resultado = valor / 100 + " metros";
-      }
-
-      document.getElementById("resultado").innerText =
-        resultado;
-    }
+  <h2 class="section-title">
+    Escolha uma categoria
+  </h2>
 
 
-    function converterPeso() {
+  <div class="categories" id="categories">
 
-      let valor =
-        Number(document.getElementById("peso").value);
-
-      let unidade =
-        document.getElementById("unidadePeso").value;
-
-      let resultado = "";
-
-      if (unidade === "kg") {
-        resultado = valor * 1000 + " gramas";
-      }
-
-      if (unidade === "g") {
-        resultado = valor / 1000 + " quilogramas";
-      }
-
-      if (unidade === "mg") {
-        resultado = valor / 1000 + " gramas";
-      }
-
-      document.getElementById("resultadoPeso").innerText =
-        resultado;
-    }
+    <button
+      class="category"
+      data-name="distancia comprimento km metros centimetros"
+      onclick="openConverter('distancia')"
+    >
+      <div class="category-icon">📏</div>
+      <h3>Distância</h3>
+      <p>Km, metros e centímetros</p>
+    </button>
 
 
-    function converterVolume() {
-
-      let valor =
-        Number(document.getElementById("volume").value);
-
-      let unidade =
-        document.getElementById("unidadeVolume").value;
-
-      let resultado = "";
-
-      if (unidade === "l") {
-        resultado = valor * 1000 + " mililitros";
-      }
-
-      if (unidade === "ml") {
-        resultado = valor / 1000 + " litros";
-      }
-
-      document.getElementById("resultadoVolume").innerText =
-        resultado;
-    }
+    <button
+      class="category"
+      data-name="peso massa kg gramas miligramas"
+      onclick="openConverter('peso')"
+    >
+      <div class="category-icon">⚖️</div>
+      <h3>Peso</h3>
+      <p>Kg, gramas e miligramas</p>
+    </button>
 
 
-    function converterTemperatura() {
+    <button
+      class="category"
+      data-name="volume litros mililitros"
+      onclick="openConverter('volume')"
+    >
+      <div class="category-icon">🧪</div>
+      <h3>Volume</h3>
+      <p>Litros e mililitros</p>
+    </button>
 
-      let valor =
-        Number(document.getElementById("temperatura").value);
 
-      let unidade =
-        document.getElementById("unidadeTemperatura").value;
+    <button
+      class="category"
+      data-name="temperatura celsius fahrenheit kelvin"
+      onclick="openConverter('temperatura')"
+    >
+      <div class="category-icon">🌡️</div>
+      <h3>Temperatura</h3>
+      <p>°C, °F e Kelvin</p>
+    </button>
 
-      let resultado = "";
 
-      if (unidade === "c-f") {
-        resultado =
-          (valor * 9 / 5 + 32).toFixed(2) + " °F";
-      }
+    <button
+      class="category"
+      data-name="tempo segundos minutos horas dias"
+      onclick="openConverter('tempo')"
+    >
+      <div class="category-icon">⏱️</div>
+      <h3>Tempo</h3>
+      <p>Segundos, minutos, horas e dias</p>
+    </button>
 
-      if (unidade === "f-c") {
-        resultado =
-          ((valor - 32) * 5 / 9).toFixed(2) + " °C";
-      }
 
-      if (unidade === "c-k") {
-        resultado =
-          (valor + 273.15).toFixed(2) + " K";
-      }
+    <button
+      class="category"
+      data-name="area metro quadrado km quadrado cm"
+      onclick="openConverter('area')"
+    >
+      <div class="category-icon">📐</div>
+      <h3>Área</h3>
+      <p>m², km² e cm²</p>
+    </button>
 
-      if (unidade === "k-c") {
-        resultado =
-          (valor - 273.15).toFixed(2) + " °C";
-      }
 
-      document.getElementById("resultadoTemperatura").innerText =
-        resultado;
-    }
+    <button
+      class="category"
+      data-name="dados armazenamento bytes kb mb gb tb"
+      onclick="openConverter('dados')"
+    >
+      <div class="category-icon">💾</div>
+      <h3>Dados</h3>
+      <p>Bytes, KB, MB e GB</p>
+    </button>
 
-  </script>
 
-</body>
-</html>
+    <button
+      class="category"
+      data-name="porcentagem percentual percent"
+      onclick="openConverter('porcentagem')"
+    >
+      <div class="category-icon">🔢</div>
+      <h3>Porcentagem</h3>
+      <p>Calcule porcentagens</p>
+    </button>
+
+  </div>
+
+
+  <!-- DISTÂNCIA -->
+
+  <section class="converter" id="distancia">
+
+    <div class="converter-head">
+
+      <div class="converter-title">
+        <div class="converter-icon">📏</div>
+
+        <div>
+          <h2>Distância</h2>
+          <p>Converta medidas de distância</p>
+        </div>
+      </div>
+
+      <button class="back-btn" onclick="closeConverter()">
+        ← Voltar
+      </button>
+
+    </div>
+
+
+    <div class="fields">
+
+      <div class="field">
+        <label>Valor</label>
+        <input id="distValor" type="number" placeholder="Ex.: 10">
+      </div>
+
+      <div class="field">
+        <label>Conversão</label>
+
+        <select id="distUnidade">
+          <option value="km-m">Quilômetros → Metros</option>
+          <option value="m-km">Metros → Quilômetros</option>
+          <option value="m-cm">Metros → Centímetros</option>
+          <option value="cm-m">Centímetros → Metros</option>
+          <option value="km-cm">Quilômetros → Centímetros</option>
+          <option value="cm-km">Centímetros → Quilômetros</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="action-buttons">
+      <button class="convert-btn" onclick="convertDistancia()">
+        Converter
+      </button>
+
+      <button class="clear-btn" onclick="clearConverter('distancia')">
+        Limpar
+      </button>
+    </div>
+
+    <div class="result">
+      <div class="result-label">RESULTADO</div>
+      <div class="result-value" id="distResultado">—</div>
+      <button class="copy-btn" onclick="copyResult('distResultado')">
+        📋 Copiar
+      </button>
+    </div>
+
+  </section>
+
+
+  <!-- PESO -->
+
+  <section class="converter" id="peso">
+
+    <div class="converter-head">
+
+      <div class="converter-title">
+        <div class="converter-icon">⚖️</div>
+
+        <div>
+          <h2>Peso</h2>
+          <p>Converta unidades de massa</p>
+        </div>
+      </div>
+
+      <button class="back-btn" onclick="closeConverter()">
+        ← Voltar
+      </button>
+
+    </div>
+
+
+    <div class="fields">
+
+      <div class="field">
+        <label>Valor</label>
+        <input id="pesoValor" type="number" placeholder="Ex.: 5">
+      </div>
+
+      <div class="field">
+        <label>Conversão</label>
+
+        <select id="pesoUnidade">
+          <option value="kg-g">Quilogramas → Gramas</option>
+          <option value="g-kg">Gramas → Quilogramas</option>
+          <option value="g-mg">Gramas → Miligramas</option>
+          <option value="mg-g">Miligramas → Gramas</option>
+          <option value="kg-mg">Quilogramas → Miligramas</option>
+          <option value="mg-kg">Miligramas → Quilogramas</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="action-buttons">
+
+      <button class="convert-btn" onclick="convertPeso()">
+        Converter
+      </button>
+
+      <button class="clear-btn" onclick="clearConverter('peso')">
+        Limpar
+      </button>
+
+    </div>
+
+    <div class="result">
+      <div class="result-label">RESULTADO</div>
+      <div class="result-value" id="pesoResultado">—</div>
+
+      <button class="copy-btn" onclick="copyResult('pesoResultado')">
+        📋 Copiar
+      </button>
+    </div>
+
+  </section>
+
+
+  <!-- VOLUME -->
+
+  <section class="converter" id="volume">
+
+    <div class="converter-head">
+
+      <div class="converter-title">
+        <div class="converter-icon">🧪</div>
+
+        <div>
+          <h2>Volume</h2>
+          <p>Converta líquidos e volumes</p>
+        </div>
+      </div>
+
+      <button class="back-btn" onclick="closeConverter()">
+        ← Voltar
+      </button>
+
+    </div>
+
+
+    <div class="fields">
+
+      <div class="field">
+        <label>Valor</label>
+        <input id="volumeValor" type="number" placeholder="Ex.: 2">
+      </div>
+
+      <div class="field">
+        <label>Conversão</label>
+
+        <select id="volumeUnidade">
+          <option value="l-ml">Litros → Mililitros</option>
+          <option value="ml-l">Mililitros → Litros</option>
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="action-buttons">
+
+      <button class="convert-btn" onclick="convertVolume()">
+        Converter
+      </button>
+
+      <button class="clear-btn" onclick="clearConverter('volume')">
+        Limpar
+      </button>
+
+    </div>
+
+
+    <div class="result">
+
+      <div class="result-label">RESULTADO</div>
+
+      <div class="result-value" id="volumeResultado">
+        —
+      </div>
+
+      <button class="copy-btn" onclick="copyResult('volumeResultado')">
+        📋 Copiar
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- TEMPERATURA -->
+
+  <section class="converter" id="temperatura">
+
+    <div class="converter-head">
+
+      <div class="converter-title">
+
+        <div class="converter-icon">
+          🌡️
+        </div>
+
+        <div>
+          <h2>Temperatura</h2>
+          <p>Celsius, Fahrenheit e Kelvin</p>
+        </div>
+
+      </div>
+
+      <button class="back-btn" onclick="closeConverter()">
+        ← Voltar
+      </button>
+
+    </div>
+
+
+    <div class="fields">
+
+      <div class="field">
+        <label>Valor</label>
+
+        <input
+          id="tempValor"
+          type="number"
+          placeholder="Ex.: 25"
+        >
+      </div>
+
+
+      <div class="field">
+
+        <label>Conversão</label>
+
+        <select id="tempUnidade">
+
+          <option value="c-f">
+            Celsius → Fahrenheit
+          </option>
+
+          <option value="f-c">
+            Fahrenheit → Celsius
+          </option>
+
+          <option value="c-k">
+            Celsius → Kelvin
+          </option>
+
+          <option value="k-c">
+            Kelvin → Celsius
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="action-buttons">
+
+      <button class="convert-btn" onclick="convertTemperatura()">
+        Converter
+      </button>
+
+      <button class="clear-btn" onclick="clearConverter('temperatura')">
+        Limpar
+      </button>
+
+    </div>
+
+
+    <div class="result">
+
+      <div class="result-label">
+        RESULTADO
+      </div>
+
+      <div
+        class="result-value"
+        id="tempResultado"
+      >
+        —
+      </div>
+
+      <button
+        class="copy-btn"
+        onclick="copyResult('tempResultado')"
+      >
+        📋 Copiar
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- TEMPO -->
+
+  <section class="converter" id="tempo">
+
+    <div class="converter-head">
+
+      <div class="converter-title">
+
+        <div class="converter-icon">
+          ⏱️
+        </div>
+
+        <div>
+          <h2>Tempo</h2>
+          <p>Converta unidades de tempo</p>
+        </div>
+
+      </div>
+
+      <button class="back-btn" onclick="closeConverter()">
+        ← Voltar
+      </button>
+
+    </div>
+
+
+    <div class="fields">
+
+      <div class="field">
+        <label>Valor</label>
+
+        <input
+          id="tempoValor"
+          type="number"
+          placeholder="Ex.: 60"
+        >
+      </div>
+
+
+      <div class="field">
+
+        <label>Conversão</label>
+
+        <select id="tempoUnidade">
+
+          <option value="s-min">
+            Segundos → Minutos
+          </option>
+
+          <option value="min-s">
+            Minutos → Segundos
+          </option>
+
+          <option value="min-h">
+            Minutos → Horas
+          </option>
+
+          <option value="h-min">
+            Horas → Minutos
+          </option>
+
+          <option value="h-d">
+            Horas → Dias
+          </option>
+
+          <option value="d-h">
+            Dias → Horas
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="action-buttons">
+
+      <button class="convert-btn" onclick="convertTempo()">
+        Converter
+      </button>
+
+      <button class="clear-btn" onclick="clearConverter('tempo')">
+        Limpar
+      </button>
+
+    </div>
+
+
+    <div class="result">
+
+      <div class="result-label">
+        RESULTADO
+      </div>
+
+      <div
+        class="result-value"
+        id="tempoResultado"
+      >
+ 
