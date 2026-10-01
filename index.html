@@ -1,3 +1,106 @@
-
-
 <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor Fácil</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f5f9;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .caixa {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px #0002;
+    }
+
+    h1 {
+      color: #1976d2;
+    }
+
+    .conversor {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      background: #f7f7f7;
+    }
+
+    input, select, button {
+      width: 90%;
+      padding: 12px;
+      margin: 7px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: #1976d2;
+      color: white;
+      border: none;
+    }
+
+    #resultado {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="caixa">
+    <h1>🔄 Conversor Fácil</h1>
+    <p>Conversões simples, rápidas e gratuitas.</p>
+
+    <div class="conversor">
+      <h2>📏 Distância</h2>
+
+      <input type="number" id="valor" placeholder="Digite um valor">
+
+      <select id="unidade">
+        <option value="km">Quilômetros → Metros</option>
+        <option value="m">Metros → Quilômetros</option>
+        <option value="cm">Centímetros → Metros</option>
+      </select>
+
+      <button onclick="converter()">Converter</button>
+
+      <p id="resultado"></p>
+    </div>
+  </div>
+
+  <script>
+    function converter() {
+      let valor = Number(document.getElementById("valor").value);
+      let unidade = document.getElementById("unidade").value;
+      let resultado = "";
+
+      if (unidade === "km") {
+        resultado = valor * 1000 + " metros";
+      }
+
+      if (unidade === "m") {
+        resultado = valor / 1000 + " quilômetros";
+      }
+
+      if (unidade === "cm") {
+        resultado = valor / 100 + " metros";
+      }
+
+      document.getElementById("resultado").innerText = resultado;
+    }
+  </script>
+
+</body>
+</html>
