@@ -50,7 +50,7 @@
       border: none;
     }
 
-    #resultado {
+    p[id^="resultado"] {
       font-weight: bold;
       margin-top: 10px;
     }
@@ -60,9 +60,11 @@
 <body>
 
   <div class="caixa">
+
     <h1>🔄 Conversor Fácil</h1>
     <p>Conversões simples, rápidas e gratuitas.</p>
 
+    <!-- DISTÂNCIA -->
     <div class="conversor">
       <h2>📏 Distância</h2>
 
@@ -78,9 +80,62 @@
 
       <p id="resultado"></p>
     </div>
+
+    <!-- PESO -->
+    <div class="conversor">
+      <h2>⚖️ Peso</h2>
+
+      <input type="number" id="peso" placeholder="Digite um valor">
+
+      <select id="unidadePeso">
+        <option value="kg">Quilogramas → Gramas</option>
+        <option value="g">Gramas → Quilogramas</option>
+        <option value="mg">Miligramas → Gramas</option>
+      </select>
+
+      <button onclick="converterPeso()">Converter</button>
+
+      <p id="resultadoPeso"></p>
+    </div>
+
+    <!-- VOLUME -->
+    <div class="conversor">
+      <h2>🧪 Volume</h2>
+
+      <input type="number" id="volume" placeholder="Digite um valor">
+
+      <select id="unidadeVolume">
+        <option value="l">Litros → Mililitros</option>
+        <option value="ml">Mililitros → Litros</option>
+      </select>
+
+      <button onclick="converterVolume()">Converter</button>
+
+      <p id="resultadoVolume"></p>
+    </div>
+
+    <!-- TEMPERATURA -->
+    <div class="conversor">
+      <h2>🌡️ Temperatura</h2>
+
+      <input type="number" id="temperatura" placeholder="Digite um valor">
+
+      <select id="unidadeTemperatura">
+        <option value="c-f">Celsius → Fahrenheit</option>
+        <option value="f-c">Fahrenheit → Celsius</option>
+        <option value="c-k">Celsius → Kelvin</option>
+        <option value="k-c">Kelvin → Celsius</option>
+      </select>
+
+      <button onclick="converterTemperatura()">Converter</button>
+
+      <p id="resultadoTemperatura"></p>
+    </div>
+
   </div>
 
   <script>
+
     function converter() {
       let valor = Number(document.getElementById("valor").value);
       let unidade = document.getElementById("unidade").value;
@@ -100,6 +155,70 @@
 
       document.getElementById("resultado").innerText = resultado;
     }
+
+
+    function converterPeso() {
+      let valor = Number(document.getElementById("peso").value);
+      let unidade = document.getElementById("unidadePeso").value;
+      let resultado = "";
+
+      if (unidade === "kg") {
+        resultado = valor * 1000 + " gramas";
+      }
+
+      if (unidade === "g") {
+        resultado = valor / 1000 + " quilogramas";
+      }
+
+      if (unidade === "mg") {
+        resultado = valor / 1000 + " gramas";
+      }
+
+      document.getElementById("resultadoPeso").innerText = resultado;
+    }
+
+
+    function converterVolume() {
+      let valor = Number(document.getElementById("volume").value);
+      let unidade = document.getElementById("unidadeVolume").value;
+      let resultado = "";
+
+      if (unidade === "l") {
+        resultado = valor * 1000 + " mililitros";
+      }
+
+      if (unidade === "ml") {
+        resultado = valor / 1000 + " litros";
+      }
+
+      document.getElementById("resultadoVolume").innerText = resultado;
+    }
+
+
+    function converterTemperatura() {
+      let valor = Number(document.getElementById("temperatura").value);
+      let unidade = document.getElementById("unidadeTemperatura").value;
+      let resultado = "";
+
+      if (unidade === "c-f") {
+        resultado = (valor * 9 / 5 + 32).toFixed(2) + " °F";
+      }
+
+      if (unidade === "f-c") {
+        resultado = ((valor - 32) * 5 / 9).toFixed(2) + " °C";
+      }
+
+      if (unidade === "c-k") {
+        resultado = (valor + 273.15).toFixed(2) + " K";
+      }
+
+      if (unidade === "k-c") {
+        resultado = (valor - 273.15).toFixed(2) + " °C";
+      }
+
+      document.getElementById("resultadoTemperatura").innerText = resultado;
+    }
+
   </script>
 
 </body>
