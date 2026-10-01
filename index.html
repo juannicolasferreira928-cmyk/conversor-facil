@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor Fácil</title>
+</head>
+
+<body>
+  <h1>Conversor Fácil</h1>
+  <p>Conversores simples e gratuitos.</p>
+
+  <h2>Distância</h2>
+  <input type="number" id="distancia" placeholder="Digite um valor">
+  <select id="unidadeDistancia">
+    <option value="km">Quilômetros</option>
+    <option value="m">Metros</option>
+    <option value="cm">Centímetros</option>
+  </select>
+  <button onclick="converterDistancia()">Converter</button>
+  <p id="resultadoDistancia"></p>
+
+  <script>
+    function converterDistancia() {
+      let valor = Number(document.getElementById("distancia").value);
+      let unidade = document.getElementById("unidadeDistancia").value;
+      let resultado;
+
+      if (unidade === "km") {
+        resultado = valor * 1000;
+        document.getElementById("resultadoDistancia").innerText =
+          resultado + " metros";
+      }
+
+      if (unidade === "m") {
+        resultado = valor / 1000;
+        document.getElementById("resultadoDistancia").innerText =
+          resultado + " quilômetros";
+      }
+
+      if (unidade === "cm") {
+        resultado = valor / 100;
+        document.getElementById("resultadoDistancia").innerText =
+          resultado + " metros";
+      }
+    }
+  </script>
+</body>
+</html>
