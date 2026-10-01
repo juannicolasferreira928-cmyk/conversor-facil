@@ -3,625 +3,453 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#2563eb">
 
-<title>Conversor Fácil</title>
+<title>Matemática Fácil</title>
 
 <style>
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html{
-  scroll-behavior:smooth;
+:root{
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --text:#172033;
+    --muted:#687386;
+    --primary:#5b5cf0;
+    --primary2:#7c4dff;
+    --premium:#ffb300;
+    --border:#e4e8f0;
+    --shadow:0 12px 35px rgba(35,45,75,.10);
+}
+
+body.dark{
+    --bg:#0c1220;
+    --card:#151c2e;
+    --text:#f5f7ff;
+    --muted:#aab3c7;
+    --border:#283249;
+    --shadow:0 12px 35px rgba(0,0,0,.3);
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  min-height:100vh;
-  color:#f8fafc;
-  background:
-    radial-gradient(circle at 10% 10%,#2563eb55,transparent 30%),
-    radial-gradient(circle at 90% 90%,#7c3aed55,transparent 30%),
-    linear-gradient(135deg,#020617,#0f172a 55%,#111827);
-  transition:.3s;
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    transition:.25s;
 }
 
-body.light{
-  color:#0f172a;
-  background:
-    radial-gradient(circle at 10% 10%,#60a5fa55,transparent 30%),
-    radial-gradient(circle at 90% 90%,#c084fc55,transparent 30%),
-    linear-gradient(135deg,#eff6ff,#f8fafc,#f5f3ff);
-}
-
-button,
-input,
-select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
+button,input,select{
+    font:inherit;
 }
 
 header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  padding:14px;
-  background:#020617dd;
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid #ffffff18;
-}
-
-body.light header{
-  background:#ffffffdd;
-  border-color:#00000012;
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
 }
 
 .nav{
-  max-width:1050px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
+    max-width:1150px;
+    margin:auto;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:bold;
-  font-size:19px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:21px;
+    font-weight:900;
 }
 
 .logo-icon{
-  width:42px;
-  height:42px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:13px;
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
-  box-shadow:0 8px 25px #2563eb55;
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    display:grid;
+    place-items:center;
+    color:white;
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
 }
 
-.top-buttons{
-  display:flex;
-  gap:8px;
+.nav-buttons{
+    display:flex;
+    gap:8px;
 }
 
 .icon-btn{
-  width:42px;
-  height:42px;
-  border:1px solid #ffffff20;
-  border-radius:12px;
-  background:#ffffff0d;
-  color:white;
-}
-
-body.light .icon-btn{
-  color:#0f172a;
-  background:#ffffffaa;
-  border-color:#00000015;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    border-radius:12px;
+    padding:9px 12px;
+    cursor:pointer;
 }
 
 .hero{
-  max-width:1050px;
-  margin:50px auto 30px;
-  padding:20px;
-  text-align:center;
+    max-width:1150px;
+    margin:28px auto;
+    padding:0 20px;
 }
 
-.badge{
-  display:inline-block;
-  padding:8px 15px;
-  border-radius:30px;
-  background:#2563eb22;
-  border:1px solid #60a5fa55;
-  color:#93c5fd;
-  font-size:13px;
-  margin-bottom:18px;
-}
-
-body.light .badge{
-  color:#1d4ed8;
+.hero-box{
+    background:linear-gradient(135deg,#5b5cf0,#7c4dff);
+    color:white;
+    border-radius:28px;
+    padding:36px;
+    box-shadow:0 20px 45px rgba(91,92,240,.25);
 }
 
 .hero h1{
-  font-size:clamp(38px,8vw,68px);
-  line-height:1;
-  margin-bottom:18px;
-  background:linear-gradient(90deg,#60a5fa,#a78bfa,#c084fc);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+    font-size:clamp(30px,6vw,52px);
+    margin-bottom:12px;
 }
 
 .hero p{
-  max-width:650px;
-  margin:auto;
-  color:#cbd5e1;
-  font-size:17px;
-  line-height:1.6;
+    max-width:700px;
+    line-height:1.6;
+    opacity:.92;
 }
 
-body.light .hero p{
-  color:#475569;
+.search{
+    margin-top:22px;
+}
+
+.search input{
+    width:100%;
+    border:0;
+    outline:0;
+    padding:15px 17px;
+    border-radius:15px;
+    color:#222;
 }
 
 .container{
-  max-width:1050px;
-  margin:auto;
-  padding:0 15px 70px;
-}
-
-.search-box{
-  max-width:650px;
-  margin:20px auto 35px;
-  position:relative;
-}
-
-.search-box input{
-  width:100%;
-  padding:17px 20px 17px 50px;
-  border-radius:16px;
-  border:1px solid #ffffff20;
-  background:#ffffff0d;
-  color:white;
-  outline:none;
-  backdrop-filter:blur(10px);
-}
-
-body.light .search-box input{
-  color:#0f172a;
-  background:#ffffffcc;
-  border-color:#00000015;
-}
-
-.search-box input::placeholder{
-  color:#94a3b8;
-}
-
-.search-icon{
-  position:absolute;
-  left:18px;
-  top:50%;
-  transform:translateY(-50%);
+    max-width:1150px;
+    margin:auto;
+    padding:0 20px 50px;
 }
 
 .section-title{
-  margin-bottom:18px;
-  font-size:22px;
+    margin:30px 0 15px;
 }
 
-.categories{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
+.section-title h2{
+    font-size:25px;
 }
 
-.category{
-  border:1px solid #ffffff18;
-  border-radius:20px;
-  padding:20px;
-  min-height:140px;
-  color:white;
-  text-align:left;
-  background:#ffffff0b;
-  transition:.25s;
+.section-title p{
+    color:var(--muted);
+    margin-top:5px;
 }
 
-body.light .category{
-  color:#0f172a;
-  background:#ffffffaa;
-  border-color:#00000010;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:15px;
 }
 
-.category:hover{
-  transform:translateY(-5px);
-  border-color:#60a5fa66;
-  background:#ffffff15;
-  box-shadow:0 15px 35px #0005;
+.card{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    transition:.2s;
+    overflow:hidden;
 }
 
-.category-icon{
-  font-size:32px;
-  margin-bottom:13px;
+.card:hover{
+    transform:translateY(-4px);
 }
 
-.category h3{
-  margin-bottom:6px;
+.card-icon{
+    font-size:30px;
+    margin-bottom:12px;
 }
 
-.category p{
-  color:#94a3b8;
-  font-size:13px;
-  line-height:1.4;
+.card h3{
+    margin-bottom:7px;
 }
 
-.converter-area{
-  margin-top:45px;
+.card p{
+    color:var(--muted);
+    font-size:14px;
+    line-height:1.5;
 }
 
-.converter{
-  display:none;
-  padding:25px;
-  border-radius:25px;
-  background:#ffffff0d;
-  border:1px solid #ffffff18;
-  backdrop-filter:blur(15px);
-  box-shadow:0 20px 50px #0005;
+.free-tag,
+.premium-tag{
+    display:inline-block;
+    margin-top:13px;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
 }
 
-body.light .converter{
-  background:#ffffffaa;
-  border-color:#00000010;
+.free-tag{
+    background:#e9f8ef;
+    color:#168344;
 }
 
-.converter.active{
-  display:block;
-  animation:entrada .35s ease;
+.premium-tag{
+    background:#fff3cd;
+    color:#9a6900;
 }
 
-@keyframes entrada{
-  from{
-    opacity:0;
-    transform:translateY(15px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+.premium-card{
+    border:2px solid var(--premium);
 }
 
-.converter-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:22px;
-  gap:10px;
+.lock{
+    position:absolute;
+    right:15px;
+    top:15px;
+    font-size:19px;
 }
 
-.converter-title{
-  display:flex;
-  align-items:center;
-  gap:12px;
+.premium-box{
+    margin:35px 0;
+    padding:28px;
+    border-radius:25px;
+    background:linear-gradient(135deg,#151c2e,#252d45);
+    color:white;
+    box-shadow:0 18px 40px rgba(0,0,0,.2);
+    border:1px solid rgba(255,193,7,.4);
 }
 
-.converter-icon{
-  width:52px;
-  height:52px;
-  border-radius:15px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
+.premium-box h2{
+    font-size:28px;
+    margin-bottom:8px;
 }
 
-.converter-title h2{
-  font-size:23px;
+.premium-box p{
+    color:#d5d9e5;
+    line-height:1.6;
 }
 
-.converter-title p{
-  color:#94a3b8;
-  font-size:13px;
-  margin-top:4px;
+.price{
+    font-size:40px;
+    font-weight:900;
+    margin:18px 0;
+    color:#ffd166;
 }
 
-.back-btn{
-  padding:10px 14px;
-  border-radius:10px;
-  border:1px solid #ffffff20;
-  background:#ffffff0d;
-  color:white;
+.premium-btn{
+    border:0;
+    background:linear-gradient(135deg,#ffb300,#ff8f00);
+    color:#241800;
+    padding:14px 22px;
+    border-radius:14px;
+    font-weight:900;
+    cursor:pointer;
 }
 
-body.light .back-btn{
-  color:#0f172a;
-  background:#ffffffaa;
-  border-color:#00000015;
+.panel{
+    display:none;
+    margin-top:25px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:25px;
+    box-shadow:var(--shadow);
 }
 
-.fields{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+.panel.active{
+    display:block;
 }
 
-.field label{
-  display:block;
-  margin-bottom:7px;
-  color:#cbd5e1;
-  font-size:13px;
+.panel h2{
+    margin-bottom:8px;
 }
 
-body.light .field label{
-  color:#475569;
+.panel-desc{
+    color:var(--muted);
+    line-height:1.6;
+    margin-bottom:20px;
 }
 
-.field input,
-.field select{
-  width:100%;
-  padding:15px;
-  border-radius:12px;
-  border:1px solid #cbd5e133;
-  background:white;
-  color:#0f172a;
-  outline:none;
+.lesson{
+    background:var(--bg);
+    border:1px solid var(--border);
+    padding:18px;
+    border-radius:17px;
+    margin:15px 0;
+    line-height:1.8;
 }
 
-.field input:focus,
-.field select:focus{
-  border-color:#60a5fa;
-  box-shadow:0 0 0 3px #3b82f633;
+.formula{
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+    padding:16px;
+    margin:15px 0;
+    background:var(--bg);
+    border-radius:13px;
 }
 
-.action-buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:15px;
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:13px;
 }
 
-.convert-btn{
-  padding:15px;
-  border:none;
-  border-radius:12px;
-  color:white;
-  font-weight:bold;
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
-  box-shadow:0 8px 20px #2563eb44;
-  transition:.2s;
+label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:7px;
 }
 
-.convert-btn:hover{
-  transform:translateY(-2px);
+input,select{
+    width:100%;
+    padding:13px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    outline:none;
+    background:var(--bg);
+    color:var(--text);
 }
 
-.clear-btn{
-  padding:15px;
-  border:1px solid #ffffff20;
-  border-radius:12px;
-  color:white;
-  background:#ffffff0d;
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:17px;
 }
 
-body.light .clear-btn{
-  color:#0f172a;
-  background:#ffffffaa;
-  border-color:#00000015;
+.btn{
+    border:0;
+    border-radius:12px;
+    padding:13px 18px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.primary{
+    color:white;
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+}
+
+.secondary{
+    background:var(--bg);
+    color:var(--text);
+    border:1px solid var(--border);
 }
 
 .result{
-  margin-top:18px;
-  padding:20px;
-  border-radius:16px;
-  text-align:center;
-  background:#2563eb12;
-  border:1px solid #3b82f633;
-  min-height:85px;
+    margin-top:18px;
+    padding:18px;
+    border-radius:15px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    line-height:1.8;
 }
 
-.result-label{
-  color:#94a3b8;
-  font-size:12px;
-  margin-bottom:8px;
-}
-
-.result-value{
-  color:#93c5fd;
-  font-size:24px;
-  font-weight:bold;
-  word-break:break-word;
-}
-
-.copy-btn{
-  margin-top:10px;
-  padding:8px 14px;
-  border:1px solid #ffffff20;
-  border-radius:10px;
-  background:#ffffff0d;
-  color:white;
-  font-size:13px;
-}
-
-body.light .copy-btn{
-  color:#0f172a;
-}
-
-.extra{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:12px;
-  gap:10px;
-}
-
-.favorite{
-  border:none;
-  background:transparent;
-  color:#94a3b8;
-  font-size:22px;
-}
-
-.favorite.active{
-  color:#facc15;
-}
-
-.history{
-  margin-top:50px;
-  padding:25px;
-  border-radius:22px;
-  background:#ffffff0b;
-  border:1px solid #ffffff18;
-}
-
-body.light .history{
-  background:#ffffffaa;
-  border-color:#00000010;
-}
-
-.history-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:15px;
-}
-
-.history-list{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-
-.history-item{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:12px;
-  border-radius:12px;
-  background:#ffffff08;
-  color:#cbd5e1;
-  font-size:13px;
-}
-
-body.light .history-item{
-  color:#475569;
-  background:#00000005;
-}
-
-.empty{
-  color:#94a3b8;
-  text-align:center;
-  padding:15px;
-}
-
-.clear-history{
-  border:none;
-  background:none;
-  color:#f87171;
-  font-size:13px;
-}
-
-.toast{
-  position:fixed;
-  bottom:25px;
-  left:50%;
-  transform:translate(-50%,120px);
-  z-index:200;
-  padding:13px 18px;
-  border-radius:13px;
-  background:#0f172a;
-  color:white;
-  box-shadow:0 10px 30px #0006;
-  transition:.3s;
-  opacity:0;
-}
-
-.toast.show{
-  transform:translate(-50%,0);
-  opacity:1;
+.result strong{
+    color:var(--primary);
 }
 
 footer{
-  text-align:center;
-  padding:30px 15px 50px;
-  color:#64748b;
-  font-size:13px;
+    text-align:center;
+    padding:35px 20px;
+    color:var(--muted);
 }
 
-.top{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  width:45px;
-  height:45px;
-  border-radius:50%;
-  border:none;
-  background:linear-gradient(135deg,#2563eb,#7c3aed);
-  color:white;
-  box-shadow:0 8px 25px #0005;
-  display:none;
-  z-index:90;
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:500;
+    background:rgba(0,0,0,.65);
+    padding:20px;
+    align-items:center;
+    justify-content:center;
 }
 
-.top.show{
-  display:block;
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:430px;
+    background:var(--card);
+    color:var(--text);
+    border-radius:25px;
+    padding:28px;
+    text-align:center;
+    box-shadow:0 25px 70px rgba(0,0,0,.35);
+}
+
+.modal-icon{
+    font-size:48px;
+    margin-bottom:10px;
+}
+
+.modal-box h2{
+    margin-bottom:10px;
+}
+
+.modal-box p{
+    color:var(--muted);
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.close{
+    margin-top:10px;
+    width:100%;
+    border:1px solid var(--border);
+    background:var(--bg);
+    color:var(--text);
+    padding:12px;
+    border-radius:12px;
+    cursor:pointer;
 }
 
 .hidden{
-  display:none!important;
+    display:none!important;
 }
 
-@media(max-width:800px){
-  .categories{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
+@media(max-width:600px){
 
-@media(max-width:500px){
-  body{
-    padding-bottom:20px;
-  }
+    .hero-box{
+        padding:25px 20px;
+        border-radius:22px;
+    }
 
-  header{
-    padding:10px;
-  }
+    .grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-  .logo span:last-child{
-    display:none;
-  }
+    .card{
+        padding:15px;
+    }
 
-  .hero{
-    margin-top:30px;
-  }
+    .panel{
+        padding:18px;
+    }
 
-  .hero h1{
-    font-size:43px;
-  }
+    .premium-box{
+        padding:22px;
+    }
 
-  .hero p{
-    font-size:15px;
-  }
-
-  .categories{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-
-  .category{
-    min-height:125px;
-    padding:15px;
-  }
-
-  .category-icon{
-    font-size:27px;
-  }
-
-  .converter{
-    padding:18px;
-  }
-
-  .converter-head{
-    align-items:flex-start;
-  }
-
-  .fields{
-    grid-template-columns:1fr;
-  }
-
-  .action-buttons{
-    grid-template-columns:1fr;
-  }
-
-  .back-btn{
-    font-size:12px;
-  }
+    .price{
+        font-size:34px;
+    }
 }
 </style>
 </head>
@@ -629,560 +457,921 @@ footer{
 <body>
 
 <header>
-  <div class="nav">
 
-    <div class="logo">
-      <div class="logo-icon">🔄</div>
-      <span>Conversor Fácil</span>
-    </div>
+<div class="nav">
 
-    <div class="top-buttons">
-      <button class="icon-btn" onclick="toggleTheme()" title="Tema">
-        🌙
-      </button>
-    </div>
+<div class="logo">
+<div class="logo-icon">∑</div>
+Matemática Fácil
+</div>
 
-  </div>
+<div class="nav-buttons">
+
+<button class="icon-btn" onclick="openPremium()">
+⭐ Premium
+</button>
+
+<button class="icon-btn" onclick="toggleTheme()">
+🌙
+</button>
+
+</div>
+
+</div>
+
 </header>
 
 
 <section class="hero">
 
-  <div class="badge">
-    ⚡ Rápido • Gratuito • Fácil
-  </div>
+<div class="hero-box">
 
-  <h1>Conversor Fácil</h1>
+<h1>Matemática Fácil 🧠🔥</h1>
 
-  <p>
-    Converta unidades de forma rápida, simples e gratuita.
-    Escolha uma categoria e faça sua conversão.
-  </p>
+<p>
+Aprenda matemática de forma simples, rápida e organizada.
+Do básico até conteúdos avançados.
+</p>
+
+<div class="search">
+
+<input
+id="search"
+type="text"
+placeholder="🔎 Pesquise: ângulos, Bhaskara, fração..."
+oninput="searchCards()"
+>
+
+</div>
+
+</div>
 
 </section>
 
 
 <main class="container">
 
-  <div class="search-box">
-
-    <span class="search-icon">🔎</span>
-
-    <input
-      id="search"
-      type="text"
-      placeholder="Pesquisar conversor..."
-      oninput="searchConverters()"
-    >
-
-  </div>
-
-
-  <h2 class="section-title">
-    Escolha uma categoria
-  </h2>
-
-
-  <div class="categories" id="categories">
-
-    <button
-      class="category"
-      data-name="distancia comprimento km metros centimetros"
-      onclick="openConverter('distancia')"
-    >
-      <div class="category-icon">📏</div>
-      <h3>Distância</h3>
-      <p>Km, metros e centímetros</p>
-    </button>
-
-
-    <button
-      class="category"
-      data-name="peso massa kg gramas miligramas"
-      onclick="openConverter('peso')"
-    >
-      <div class="category-icon">⚖️</div>
-      <h3>Peso</h3>
-      <p>Kg, gramas e miligramas</p>
-    </button>
-
-
-    <button
-      class="category"
-      data-name="volume litros mililitros"
-      onclick="openConverter('volume')"
-    >
-      <div class="category-icon">🧪</div>
-      <h3>Volume</h3>
-      <p>Litros e mililitros</p>
-    </button>
-
-
-    <button
-      class="category"
-      data-name="temperatura celsius fahrenheit kelvin"
-      onclick="openConverter('temperatura')"
-    >
-      <div class="category-icon">🌡️</div>
-      <h3>Temperatura</h3>
-      <p>°C, °F e Kelvin</p>
-    </button>
-
-
-    <button
-      class="category"
-      data-name="tempo segundos minutos horas dias"
-      onclick="openConverter('tempo')"
-    >
-      <div class="category-icon">⏱️</div>
-      <h3>Tempo</h3>
-      <p>Segundos, minutos, horas e dias</p>
-    </button>
-
-
-    <button
-      class="category"
-      data-name="area metro quadrado km quadrado cm"
-      onclick="openConverter('area')"
-    >
-      <div class="category-icon">📐</div>
-      <h3>Área</h3>
-      <p>m², km² e cm²</p>
-    </button>
 
+<div class="section-title">
 
-    <button
-      class="category"
-      data-name="dados armazenamento bytes kb mb gb tb"
-      onclick="openConverter('dados')"
-    >
-      <div class="category-icon">💾</div>
-      <h3>Dados</h3>
-      <p>Bytes, KB, MB e GB</p>
-    </button>
+<h2>🆓 Conteúdos gratuitos</h2>
 
+<p>
+Comece aprendendo sem pagar nada.
+</p>
 
-    <button
-      class="category"
-      data-name="porcentagem percentual percent"
-      onclick="openConverter('porcentagem')"
-    >
-      <div class="category-icon">🔢</div>
-      <h3>Porcentagem</h3>
-      <p>Calcule porcentagens</p>
-    </button>
+</div>
 
-  </div>
 
+<div class="grid" id="cards">
 
-  <!-- DISTÂNCIA -->
 
-  <section class="converter" id="distancia">
+<div class="card"
+data-search="matematica basica adição subtração multiplicação divisão"
+onclick="openPanel('basica')">
 
-    <div class="converter-head">
+<div class="card-icon">➕</div>
 
-      <div class="converter-title">
-        <div class="converter-icon">📏</div>
+<h3>Matemática básica</h3>
 
-        <div>
-          <h2>Distância</h2>
-          <p>Converta medidas de distância</p>
-        </div>
-      </div>
+<p>
+Adição, subtração, multiplicação e divisão.
+</p>
 
-      <button class="back-btn" onclick="closeConverter()">
-        ← Voltar
-      </button>
+<span class="free-tag">GRÁTIS</span>
 
-    </div>
+</div>
 
 
-    <div class="fields">
+<div class="card"
+data-search="fração fracoes"
+onclick="openPanel('fracao')">
 
-      <div class="field">
-        <label>Valor</label>
-        <input id="distValor" type="number" placeholder="Ex.: 10">
-      </div>
+<div class="card-icon">🍕</div>
 
-      <div class="field">
-        <label>Conversão</label>
+<h3>Frações</h3>
 
-        <select id="distUnidade">
-          <option value="km-m">Quilômetros → Metros</option>
-          <option value="m-km">Metros → Quilômetros</option>
-          <option value="m-cm">Metros → Centímetros</option>
-          <option value="cm-m">Centímetros → Metros</option>
-          <option value="km-cm">Quilômetros → Centímetros</option>
-          <option value="cm-km">Centímetros → Quilômetros</option>
-        </select>
-      </div>
+<p>
+Aprenda o básico das frações.
+</p>
 
-    </div>
+<span class="free-tag">GRÁTIS</span>
 
-    <div class="action-buttons">
-      <button class="convert-btn" onclick="convertDistancia()">
-        Converter
-      </button>
+</div>
 
-      <button class="clear-btn" onclick="clearConverter('distancia')">
-        Limpar
-      </button>
-    </div>
 
-    <div class="result">
-      <div class="result-label">RESULTADO</div>
-      <div class="result-value" id="distResultado">—</div>
-      <button class="copy-btn" onclick="copyResult('distResultado')">
-        📋 Copiar
-      </button>
-    </div>
+<div class="card"
+data-search="porcentagem"
+onclick="openPanel('porcentagem')">
 
-  </section>
+<div class="card-icon">💯</div>
 
+<h3>Porcentagem</h3>
 
-  <!-- PESO -->
+<p>
+Calcule porcentagens facilmente.
+</p>
 
-  <section class="converter" id="peso">
+<span class="free-tag">GRÁTIS</span>
 
-    <div class="converter-head">
+</div>
 
-      <div class="converter-title">
-        <div class="converter-icon">⚖️</div>
 
-        <div>
-          <h2>Peso</h2>
-          <p>Converta unidades de massa</p>
-        </div>
-      </div>
+<div class="card"
+data-search="equação equacao primeiro grau"
+onclick="openPanel('equacao')">
 
-      <button class="back-btn" onclick="closeConverter()">
-        ← Voltar
-      </button>
+<div class="card-icon">🟰</div>
 
-    </div>
+<h3>Equação do 1º grau</h3>
 
+<p>
+Aprenda a encontrar o valor de X.
+</p>
 
-    <div class="fields">
+<span class="free-tag">GRÁTIS</span>
 
-      <div class="field">
-        <label>Valor</label>
-        <input id="pesoValor" type="number" placeholder="Ex.: 5">
-      </div>
+</div>
 
-      <div class="field">
-        <label>Conversão</label>
 
-        <select id="pesoUnidade">
-          <option value="kg-g">Quilogramas → Gramas</option>
-          <option value="g-kg">Gramas → Quilogramas</option>
-          <option value="g-mg">Gramas → Miligramas</option>
-          <option value="mg-g">Miligramas → Gramas</option>
-          <option value="kg-mg">Quilogramas → Miligramas</option>
-          <option value="mg-kg">Miligramas → Quilogramas</option>
-        </select>
-      </div>
+<div class="card"
+data-search="angulos ângulos"
+onclick="openPanel('angulos')">
 
-    </div>
+<div class="card-icon">📐</div>
 
-    <div class="action-buttons">
+<h3>Ângulos</h3>
 
-      <button class="convert-btn" onclick="convertPeso()">
-        Converter
-      </button>
+<p>
+Agudo, reto, obtuso e completo.
+</p>
 
-      <button class="clear-btn" onclick="clearConverter('peso')">
-        Limpar
-      </button>
+<span class="free-tag">GRÁTIS</span>
 
-    </div>
+</div>
 
-    <div class="result">
-      <div class="result-label">RESULTADO</div>
-      <div class="result-value" id="pesoResultado">—</div>
 
-      <button class="copy-btn" onclick="copyResult('pesoResultado')">
-        📋 Copiar
-      </button>
-    </div>
+<div class="card"
+data-search="potencia potenciação"
+onclick="openPanel('potencia')">
 
-  </section>
+<div class="card-icon">✖️</div>
 
+<h3>Potenciação</h3>
 
-  <!-- VOLUME -->
+<p>
+Aprenda base e expoente.
+</p>
 
-  <section class="converter" id="volume">
+<span class="free-tag">GRÁTIS</span>
 
-    <div class="converter-head">
+</div>
 
-      <div class="converter-title">
-        <div class="converter-icon">🧪</div>
 
-        <div>
-          <h2>Volume</h2>
-          <p>Converta líquidos e volumes</p>
-        </div>
-      </div>
+</div>
 
-      <button class="back-btn" onclick="closeConverter()">
-        ← Voltar
-      </button>
 
-    </div>
+<!-- PREMIUM -->
 
+<div class="premium-box">
 
-    <div class="fields">
+<h2>⭐ Matemática Fácil Premium</h2>
 
-      <div class="field">
-        <label>Valor</label>
-        <input id="volumeValor" type="number" placeholder="Ex.: 2">
-      </div>
+<p>
+Desbloqueie conteúdos extras, exercícios e ferramentas
+mais avançadas.
+</p>
 
-      <div class="field">
-        <label>Conversão</label>
+<div class="price">
+R$ 1
+</div>
 
-        <select id="volumeUnidade">
-          <option value="l-ml">Litros → Mililitros</option>
-          <option value="ml-l">Mililitros → Litros</option>
-        </select>
+<button class="premium-btn" onclick="openPremium()">
+🔒 Desbloquear Premium
+</button>
 
-      </div>
+</div>
 
-    </div>
 
+<div class="section-title">
 
-    <div class="action-buttons">
+<h2>⭐ Conteúdos Premium</h2>
 
-      <button class="convert-btn" onclick="convertVolume()">
-        Converter
-      </button>
+<p>
+Esses conteúdos aparecem bloqueados enquanto o Premium
+não estiver liberado.
+</p>
 
-      <button class="clear-btn" onclick="clearConverter('volume')">
-        Limpar
-      </button>
+</div>
 
-    </div>
 
+<div class="grid">
 
-    <div class="result">
 
-      <div class="result-label">RESULTADO</div>
+<div class="card premium-card"
+onclick="openPremium()">
 
-      <div class="result-value" id="volumeResultado">
-        —
-      </div>
+<span class="lock">🔒</span>
 
-      <button class="copy-btn" onclick="copyResult('volumeResultado')">
-        📋 Copiar
-      </button>
+<div class="card-icon">🧮</div>
 
-    </div>
+<h3>Bhaskara</h3>
 
-  </section>
+<p>
+Equações do 2º grau.
+</p>
 
+<span class="premium-tag">⭐ PREMIUM</span>
 
-  <!-- TEMPERATURA -->
+</div>
 
-  <section class="converter" id="temperatura">
 
-    <div class="converter-head">
+<div class="card premium-card"
+onclick="openPremium()">
 
-      <div class="converter-title">
+<span class="lock">🔒</span>
 
-        <div class="converter-icon">
-          🌡️
-        </div>
+<div class="card-icon">📐</div>
 
-        <div>
-          <h2>Temperatura</h2>
-          <p>Celsius, Fahrenheit e Kelvin</p>
-        </div>
+<h3>Geometria completa</h3>
 
-      </div>
+<p>
+Áreas, perímetros e formas.
+</p>
 
-      <button class="back-btn" onclick="closeConverter()">
-        ← Voltar
-      </button>
+<span class="premium-tag">⭐ PREMIUM</span>
 
-    </div>
+</div>
 
 
-    <div class="fields">
+<div class="card premium-card"
+onclick="openPremium()">
 
-      <div class="field">
-        <label>Valor</label>
+<span class="lock">🔒</span>
 
-        <input
-          id="tempValor"
-          type="number"
-          placeholder="Ex.: 25"
-        >
-      </div>
+<div class="card-icon">🔺</div>
 
+<h3>Pitágoras</h3>
 
-      <div class="field">
+<p>
+Triângulos retângulos.
+</p>
 
-        <label>Conversão</label>
+<span class="premium-tag">⭐ PREMIUM</span>
 
-        <select id="tempUnidade">
+</div>
 
-          <option value="c-f">
-            Celsius → Fahrenheit
-          </option>
 
-          <option value="f-c">
-            Fahrenheit → Celsius
-          </option>
+<div class="card premium-card"
+onclick="openPremium()">
 
-          <option value="c-k">
-            Celsius → Kelvin
-          </option>
+<span class="lock">🔒</span>
 
-          <option value="k-c">
-            Kelvin → Celsius
-          </option>
+<div class="card-icon">📊</div>
 
-        </select>
+<h3>Estatística</h3>
 
-      </div>
+<p>
+Média, moda e mediana.
+</p>
 
-    </div>
+<span class="premium-tag">⭐ PREMIUM</span>
 
+</div>
 
-    <div class="action-buttons">
 
-      <button class="convert-btn" onclick="convertTemperatura()">
-        Converter
-      </button>
+<div class="card premium-card"
+onclick="openPremium()">
 
-      <button class="clear-btn" onclick="clearConverter('temperatura')">
-        Limpar
-      </button>
+<span class="lock">🔒</span>
 
-    </div>
+<div class="card-icon">🎲</div>
 
+<h3>Probabilidade</h3>
 
-    <div class="result">
+<p>
+Aprenda a calcular chances.
+</p>
 
-      <div class="result-label">
-        RESULTADO
-      </div>
+<span class="premium-tag">⭐ PREMIUM</span>
 
-      <div
-        class="result-value"
-        id="tempResultado"
-      >
-        —
-      </div>
+</div>
 
-      <button
-        class="copy-btn"
-        onclick="copyResult('tempResultado')"
-      >
-        📋 Copiar
-      </button>
 
-    </div>
+<div class="card premium-card"
+onclick="openPremium()">
 
-  </section>
+<span class="lock">🔒</span>
 
+<div class="card-icon">📈</div>
 
-  <!-- TEMPO -->
+<h3>Regra de três</h3>
 
-  <section class="converter" id="tempo">
+<p>
+Resolva proporções.
+</p>
 
-    <div class="converter-head">
+<span class="premium-tag">⭐ PREMIUM</span>
 
-      <div class="converter-title">
+</div>
 
-        <div class="converter-icon">
-          ⏱️
-        </div>
 
-        <div>
-          <h2>Tempo</h2>
-          <p>Converta unidades de tempo</p>
-        </div>
+<div class="card premium-card"
+onclick="openPremium()">
 
-      </div>
+<span class="lock">🔒</span>
 
-      <button class="back-btn" onclick="closeConverter()">
-        ← Voltar
-      </button>
+<div class="card-icon">📉</div>
 
-    </div>
+<h3>Funções</h3>
 
+<p>
+Funções matemáticas.
+</p>
 
-    <div class="fields">
+<span class="premium-tag">⭐ PREMIUM</span>
 
-      <div class="field">
-        <label>Valor</label>
+</div>
 
-        <input
-          id="tempoValor"
-          type="number"
-          placeholder="Ex.: 60"
-        >
-      </div>
 
+<div class="card premium-card"
+onclick="openPremium()">
 
-      <div class="field">
+<span class="lock">🔒</span>
 
-        <label>Conversão</label>
+<div class="card-icon">📐</div>
 
-        <select id="tempoUnidade">
+<h3>Trigonometria</h3>
 
-          <option value="s-min">
-            Segundos → Minutos
-          </option>
+<p>
+Seno, cosseno e tangente.
+</p>
 
-          <option value="min-s">
-            Minutos → Segundos
-          </option>
+<span class="premium-tag">⭐ PREMIUM</span>
 
-          <option value="min-h">
-            Minutos → Horas
-          </option>
+</div>
 
-          <option value="h-min">
-            Horas → Minutos
-          </option>
 
-          <option value="h-d">
-            Horas → Dias
-          </option>
+</div>
 
-          <option value="d-h">
-            Dias → Horas
-          </option>
 
-        </select>
+<!-- PAINEL BÁSICO -->
 
-      </div>
+<div class="panel" id="basica">
 
-    </div>
+<h2>➕ Matemática básica</h2>
 
+<p class="panel-desc">
+A base de toda a matemática.
+</p>
 
-    <div class="action-buttons">
+<div class="lesson">
 
-      <button class="convert-btn" onclick="convertTempo()">
-        Converter
-      </button>
+<b>Adição</b><br>
+Juntar valores.
 
-      <button class="clear-btn" onclick="clearConverter('tempo')">
-        Limpar
-      </button>
+<br><br>
 
-    </div>
+8 + 5 = <b>13</b>
 
+</div>
 
-    <div class="result">
+<div class="lesson">
 
-      <div class="result-label">
-        RESULTADO
-      </div>
+<b>Subtração</b><br>
+Descobrir a diferença.
 
-      <div
-        class="result-value"
-        id="tempoResultado"
-      >
- 
+<br><br>
+
+15 − 7 = <b>8</b>
+
+</div>
+
+<div class="lesson">
+
+<b>Multiplicação</b><br>
+Soma repetida.
+
+<br><br>
+
+4 × 3 = <b>12</b>
+
+</div>
+
+<div class="lesson">
+
+<b>Divisão</b><br>
+Repartir em partes iguais.
+
+<br><br>
+
+20 ÷ 4 = <b>5</b>
+
+</div>
+
+</div>
+
+
+<!-- FRAÇÃO -->
+
+<div class="panel" id="fracao">
+
+<h2>🍕 Frações</h2>
+
+<p class="panel-desc">
+Uma fração representa uma parte de um todo.
+</p>
+
+<div class="formula">
+numerador / denominador
+</div>
+
+<div class="lesson">
+
+<b>Exemplo:</b>
+
+<br><br>
+
+3 / 4
+
+<br><br>
+
+3 é o numerador.
+
+<br>
+
+4 é o denominador.
+
+</div>
+
+</div>
+
+
+<!-- PORCENTAGEM -->
+
+<div class="panel" id="porcentagem">
+
+<h2>💯 Porcentagem</h2>
+
+<p class="panel-desc">
+Calcule quanto representa uma porcentagem.
+</p>
+
+<div class="formula">
+parte = total × porcentagem ÷ 100
+</div>
+
+<div class="form-grid">
+
+<div>
+
+<label>Total</label>
+
+<input
+id="pctTotal"
+type="number"
+placeholder="Ex: 200"
+>
+
+</div>
+
+
+<div>
+
+<label>Porcentagem (%)</label>
+
+<input
+id="pctValor"
+type="number"
+placeholder="Ex: 15"
+>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="btn primary"
+onclick="calcularPorcentagem()">
+
+Calcular
+
+</button>
+
+</div>
+
+
+<div
+class="result"
+id="pctResult">
+
+Digite os valores.
+
+</div>
+
+</div>
+
+
+<!-- EQUAÇÃO -->
+
+<div class="panel" id="equacao">
+
+<h2>🟰 Equação do 1º grau</h2>
+
+<p class="panel-desc">
+
+Uma equação do primeiro grau possui
+uma incógnita elevada ao expoente 1.
+
+</p>
+
+<div class="formula">
+
+ax + b = c
+
+</div>
+
+
+<div class="lesson">
+
+<b>Exemplo:</b>
+
+<br><br>
+
+2x + 6 = 14
+
+<br><br>
+
+2x = 14 − 6
+
+<br>
+
+2x = 8
+
+<br><br>
+
+x = 8 ÷ 2
+
+<br>
+
+x = <b>4</b>
+
+</div>
+
+</div>
+
+
+<!-- ÂNGULOS -->
+
+<div class="panel" id="angulos">
+
+<h2>📐 Ângulos</h2>
+
+<p class="panel-desc">
+Os principais tipos de ângulos.
+</p>
+
+<div class="lesson">
+
+<b>Ângulo agudo</b>
+
+<br>
+
+Maior que 0° e menor que 90°.
+
+<br><br>
+
+Exemplo: 45°
+
+</div>
+
+
+<div class="lesson">
+
+<b>Ângulo reto</b>
+
+<br>
+
+Mede exatamente 90°.
+
+</div>
+
+
+<div class="lesson">
+
+<b>Ângulo obtuso</b>
+
+<br>
+
+Maior que 90° e menor que 180°.
+
+<br><br>
+
+Exemplo: 120°
+
+</div>
+
+
+<div class="lesson">
+
+<b>Ângulo raso</b>
+
+<br>
+
+Mede 180°.
+
+</div>
+
+
+<div class="lesson">
+
+<b>Ângulo completo</b>
+
+<br>
+
+Mede 360°.
+
+</div>
+
+</div>
+
+
+<!-- POTÊNCIA -->
+
+<div class="panel" id="potencia">
+
+<h2>✖️ Potenciação</h2>
+
+<p class="panel-desc">
+Potenciação representa uma multiplicação repetida.
+</p>
+
+<div class="formula">
+
+2³ = 2 × 2 × 2 = 8
+
+</div>
+
+<div class="lesson">
+
+2 = base
+
+<br>
+
+3 = expoente
+
+<br>
+
+8 = potência
+
+</div>
+
+</div>
+
+
+</main>
+
+
+<footer>
+
+🧠 Matemática Fácil
+
+<br><br>
+
+Aprender matemática pode ser simples.
+
+</footer>
+
+
+<!-- MODAL PREMIUM -->
+
+<div class="modal" id="premiumModal">
+
+<div class="modal-box">
+
+<div class="modal-icon">
+⭐
+</div>
+
+<h2>Matemática Fácil Premium</h2>
+
+<p>
+
+Você encontrou um conteúdo Premium!
+
+<br><br>
+
+<strong>Valor demonstrativo: R$1</strong>
+
+<br><br>
+
+⚠️ O pagamento ainda não está disponível.
+Este botão é apenas uma demonstração visual.
+
+</p>
+
+<button
+class="premium-btn"
+onclick="closePremium()">
+
+Entendi
+
+</button>
+
+<button
+class="close"
+onclick="closePremium()">
+
+Fechar
+
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* TEMA */
+
+function toggleTheme(){
+
+document.body.classList.toggle("dark");
+
+if(document.body.classList.contains("dark")){
+
+localStorage.setItem("theme","dark");
+
+}else{
+
+localStorage.setItem("theme","light");
+
+}
+
+}
+
+
+/* CARREGAR TEMA */
+
+if(localStorage.getItem("theme")==="dark"){
+
+document.body.classList.add("dark");
+
+}
+
+
+/* ABRIR PAINEL */
+
+function openPanel(id){
+
+document.querySelectorAll(".panel")
+.forEach(panel=>{
+panel.classList.remove("active");
+});
+
+const panel=document.getElementById(id);
+
+if(panel){
+
+panel.classList.add("active");
+
+panel.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+}
+
+}
+
+
+/* PESQUISA */
+
+function searchCards(){
+
+const value=
+document.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+document.querySelectorAll(".card")
+.forEach(card=>{
+
+const text=
+(card.dataset.search || card.innerText)
+.toLowerCase();
+
+if(text.includes(value)){
+
+card.classList.remove("hidden");
+
+}else{
+
+card.classList.add("hidden");
+
+}
+
+});
+
+}
+
+
+/* PORCENTAGEM */
+
+function calcularPorcentagem(){
+
+const total=
+parseFloat(
+document.getElementById("pctTotal").value
+);
+
+const porcentagem=
+parseFloat(
+document.getElementById("pctValor").value
+);
+
+const result=
+document.getElementById("pctResult");
+
+if(isNaN(total)||isNaN(porcentagem)){
+
+result.innerHTML=
+"⚠️ Digite os dois valores.";
+
+return;
+
+}
+
+const resposta=
+total*porcentagem/100;
+
+result.innerHTML=
+"<strong>Resultado:</strong><br><br>"+
+porcentagem+
+"% de "+
+total+
+" = <b>"+
+resposta+
+"</b>";
+
+}
+
+
+/* PREMIUM */
+
+function openPremium(){
+
+document
+.getElementById("premiumModal")
+.classList.add("active");
+
+}
+
+
+function closePremium(){
+
+document
+.getElementById("premiumModal")
+.classList.remove("active");
+
+}
+
+
+/* FECHAR MODAL CLICANDO FORA */
+
+document
+.getElementById("premiumModal")
+.addEventListener("click",function(event){
+
+if(event.target===this){
+
+closePremium();
+
+}
+
+});
+
+
+/* ENTER NA PESQUISA */
+
+document
+.getElementById("search")
+.addEventListener("keydown",function(event){
+
+if(event.key==="Enter"){
+
+searchCards();
+
+}
+
+});
+
+</script>
+
+</body>
+                      </html>
