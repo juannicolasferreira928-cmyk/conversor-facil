@@ -3,56 +3,217 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Conversor Fácil</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f2f5f9;
       margin: 0;
-      padding: 20px;
-      text-align: center;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      padding: 30px 15px;
+      color: #ffffff;
+
+      background:
+        radial-gradient(circle at top left, #3b82f6 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #8b5cf6 0%, transparent 35%),
+        linear-gradient(135deg, #020617, #0f172a);
     }
 
     .caixa {
-      max-width: 500px;
+      width: 100%;
+      max-width: 650px;
       margin: auto;
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px #0002;
+      padding: 30px 20px;
+
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 28px;
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .topo {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 75px;
+      height: 75px;
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 22px;
+
+      font-size: 38px;
+
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+
+      box-shadow:
+        0 10px 30px rgba(59, 130, 246, 0.45);
     }
 
     h1 {
-      color: #1976d2;
+      margin: 18px 0 8px;
+      font-size: 34px;
+
+      background: linear-gradient(90deg, #60a5fa, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .descricao {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 15px;
     }
 
     .conversor {
       margin-top: 20px;
-      padding: 15px;
-      border-radius: 12px;
-      background: #f7f7f7;
+      padding: 22px;
+
+      border-radius: 20px;
+
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+
+      transition: 0.25s;
     }
 
-    input, select, button {
-      width: 90%;
-      padding: 12px;
-      margin: 7px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+    .conversor:hover {
+      transform: translateY(-3px);
+
+      background: rgba(255, 255, 255, 0.13);
+
+      box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .conversor h2 {
+      margin: 0 0 15px;
+      color: #ffffff;
+      font-size: 21px;
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      padding: 14px;
+      margin: 6px 0;
+
+      border-radius: 12px;
+
       font-size: 16px;
+      font-family: Arial, sans-serif;
+
       box-sizing: border-box;
     }
 
+    input,
+    select {
+      color: #0f172a;
+      background: #ffffff;
+      border: 2px solid transparent;
+
+      outline: none;
+
+      transition: 0.2s;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #60a5fa;
+      box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+    }
+
     button {
-      background: #1976d2;
-      color: white;
+      margin-top: 10px;
+
+      color: #ffffff;
+      font-weight: bold;
+
       border: none;
+
+      cursor: pointer;
+
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+
+      box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.35);
+
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 12px 25px rgba(124, 58, 237, 0.45);
+    }
+
+    button:active {
+      transform: scale(0.98);
     }
 
     p[id^="resultado"] {
+      min-height: 20px;
+
+      margin: 15px 0 0;
+
+      color: #93c5fd;
+
+      font-size: 17px;
       font-weight: bold;
-      margin-top: 10px;
+
+      text-shadow:
+        0 0 10px rgba(147, 197, 253, 0.25);
+    }
+
+    .rodape {
+      text-align: center;
+      margin-top: 25px;
+
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    @media (max-width: 480px) {
+
+      body {
+        padding: 15px 10px;
+      }
+
+      .caixa {
+        padding: 25px 15px;
+        border-radius: 22px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .logo {
+        width: 65px;
+        height: 65px;
+        font-size: 32px;
+      }
+
+      .conversor {
+        padding: 18px;
+      }
     }
   </style>
 </head>
@@ -61,84 +222,186 @@
 
   <div class="caixa">
 
-    <h1>🔄 Conversor Fácil</h1>
-    <p>Conversões simples, rápidas e gratuitas.</p>
+    <div class="topo">
+
+      <div class="logo">
+        🔄
+      </div>
+
+      <h1>Conversor Fácil</h1>
+
+      <p class="descricao">
+        Converta unidades de forma rápida, simples e gratuita.
+      </p>
+
+    </div>
+
 
     <!-- DISTÂNCIA -->
+
     <div class="conversor">
+
       <h2>📏 Distância</h2>
 
-      <input type="number" id="valor" placeholder="Digite um valor">
+      <input
+        type="number"
+        id="valor"
+        placeholder="Digite um valor"
+      >
 
       <select id="unidade">
-        <option value="km">Quilômetros → Metros</option>
-        <option value="m">Metros → Quilômetros</option>
-        <option value="cm">Centímetros → Metros</option>
+
+        <option value="km">
+          Quilômetros → Metros
+        </option>
+
+        <option value="m">
+          Metros → Quilômetros
+        </option>
+
+        <option value="cm">
+          Centímetros → Metros
+        </option>
+
       </select>
 
-      <button onclick="converter()">Converter</button>
+      <button onclick="converter()">
+        Converter
+      </button>
 
       <p id="resultado"></p>
+
     </div>
+
 
     <!-- PESO -->
+
     <div class="conversor">
+
       <h2>⚖️ Peso</h2>
 
-      <input type="number" id="peso" placeholder="Digite um valor">
+      <input
+        type="number"
+        id="peso"
+        placeholder="Digite um valor"
+      >
 
       <select id="unidadePeso">
-        <option value="kg">Quilogramas → Gramas</option>
-        <option value="g">Gramas → Quilogramas</option>
-        <option value="mg">Miligramas → Gramas</option>
+
+        <option value="kg">
+          Quilogramas → Gramas
+        </option>
+
+        <option value="g">
+          Gramas → Quilogramas
+        </option>
+
+        <option value="mg">
+          Miligramas → Gramas
+        </option>
+
       </select>
 
-      <button onclick="converterPeso()">Converter</button>
+      <button onclick="converterPeso()">
+        Converter
+      </button>
 
       <p id="resultadoPeso"></p>
+
     </div>
+
 
     <!-- VOLUME -->
+
     <div class="conversor">
+
       <h2>🧪 Volume</h2>
 
-      <input type="number" id="volume" placeholder="Digite um valor">
+      <input
+        type="number"
+        id="volume"
+        placeholder="Digite um valor"
+      >
 
       <select id="unidadeVolume">
-        <option value="l">Litros → Mililitros</option>
-        <option value="ml">Mililitros → Litros</option>
+
+        <option value="l">
+          Litros → Mililitros
+        </option>
+
+        <option value="ml">
+          Mililitros → Litros
+        </option>
+
       </select>
 
-      <button onclick="converterVolume()">Converter</button>
+      <button onclick="converterVolume()">
+        Converter
+      </button>
 
       <p id="resultadoVolume"></p>
+
     </div>
 
+
     <!-- TEMPERATURA -->
+
     <div class="conversor">
+
       <h2>🌡️ Temperatura</h2>
 
-      <input type="number" id="temperatura" placeholder="Digite um valor">
+      <input
+        type="number"
+        id="temperatura"
+        placeholder="Digite um valor"
+      >
 
       <select id="unidadeTemperatura">
-        <option value="c-f">Celsius → Fahrenheit</option>
-        <option value="f-c">Fahrenheit → Celsius</option>
-        <option value="c-k">Celsius → Kelvin</option>
-        <option value="k-c">Kelvin → Celsius</option>
+
+        <option value="c-f">
+          Celsius → Fahrenheit
+        </option>
+
+        <option value="f-c">
+          Fahrenheit → Celsius
+        </option>
+
+        <option value="c-k">
+          Celsius → Kelvin
+        </option>
+
+        <option value="k-c">
+          Kelvin → Celsius
+        </option>
+
       </select>
 
-      <button onclick="converterTemperatura()">Converter</button>
+      <button onclick="converterTemperatura()">
+        Converter
+      </button>
 
       <p id="resultadoTemperatura"></p>
+
+    </div>
+
+
+    <div class="rodape">
+      Conversor Fácil • Gratuito e simples
     </div>
 
   </div>
 
+
   <script>
 
     function converter() {
-      let valor = Number(document.getElementById("valor").value);
-      let unidade = document.getElementById("unidade").value;
+
+      let valor =
+        Number(document.getElementById("valor").value);
+
+      let unidade =
+        document.getElementById("unidade").value;
+
       let resultado = "";
 
       if (unidade === "km") {
@@ -153,13 +416,19 @@
         resultado = valor / 100 + " metros";
       }
 
-      document.getElementById("resultado").innerText = resultado;
+      document.getElementById("resultado").innerText =
+        resultado;
     }
 
 
     function converterPeso() {
-      let valor = Number(document.getElementById("peso").value);
-      let unidade = document.getElementById("unidadePeso").value;
+
+      let valor =
+        Number(document.getElementById("peso").value);
+
+      let unidade =
+        document.getElementById("unidadePeso").value;
+
       let resultado = "";
 
       if (unidade === "kg") {
@@ -174,13 +443,19 @@
         resultado = valor / 1000 + " gramas";
       }
 
-      document.getElementById("resultadoPeso").innerText = resultado;
+      document.getElementById("resultadoPeso").innerText =
+        resultado;
     }
 
 
     function converterVolume() {
-      let valor = Number(document.getElementById("volume").value);
-      let unidade = document.getElementById("unidadeVolume").value;
+
+      let valor =
+        Number(document.getElementById("volume").value);
+
+      let unidade =
+        document.getElementById("unidadeVolume").value;
+
       let resultado = "";
 
       if (unidade === "l") {
@@ -191,32 +466,43 @@
         resultado = valor / 1000 + " litros";
       }
 
-      document.getElementById("resultadoVolume").innerText = resultado;
+      document.getElementById("resultadoVolume").innerText =
+        resultado;
     }
 
 
     function converterTemperatura() {
-      let valor = Number(document.getElementById("temperatura").value);
-      let unidade = document.getElementById("unidadeTemperatura").value;
+
+      let valor =
+        Number(document.getElementById("temperatura").value);
+
+      let unidade =
+        document.getElementById("unidadeTemperatura").value;
+
       let resultado = "";
 
       if (unidade === "c-f") {
-        resultado = (valor * 9 / 5 + 32).toFixed(2) + " °F";
+        resultado =
+          (valor * 9 / 5 + 32).toFixed(2) + " °F";
       }
 
       if (unidade === "f-c") {
-        resultado = ((valor - 32) * 5 / 9).toFixed(2) + " °C";
+        resultado =
+          ((valor - 32) * 5 / 9).toFixed(2) + " °C";
       }
 
       if (unidade === "c-k") {
-        resultado = (valor + 273.15).toFixed(2) + " K";
+        resultado =
+          (valor + 273.15).toFixed(2) + " K";
       }
 
       if (unidade === "k-c") {
-        resultado = (valor - 273.15).toFixed(2) + " °C";
+        resultado =
+          (valor - 273.15).toFixed(2) + " °C";
       }
 
-      document.getElementById("resultadoTemperatura").innerText = resultado;
+      document.getElementById("resultadoTemperatura").innerText =
+        resultado;
     }
 
   </script>
